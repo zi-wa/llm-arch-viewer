@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Architecture Viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="top">
+  <div class="wrap">
+    <div id="brand">
+      <h1 data-t="title">LLM Architecture Viewer</h1>
+      <p id="lang">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+      </p>
+    </div>
+    <p id="lede" data-t="lede">Any Hugging Face model, drawn from its config.json</p>
+    <form id="query" autocomplete="off">
+      <label for="repo" data-t="repoLabel">Model ID or Hugging Face URL</label>
+      <div id="field">
+        <input id="repo" name="repo" list="suggest" placeholder="Qwen/Qwen3-8B" spellcheck="false" autocapitalize="off">
+        <button type="submit" data-t="submit">Show architecture</button>
+      </div>
+      <datalist id="suggest"></datalist>
+    </form>
+    <p id="upload">
+      <label for="file" data-t="upload">Open config.json</label>
+      <input id="file" type="file" accept=".json,application/json" hidden>
+      <span data-t="uploadHint">or drop it on the page</span>
+    </p>
+    <p id="examples"><span data-t="examples">Examples</span>
+      <a href="#Qwen/Qwen3-8B">Qwen3-8B</a>
+      <a href="#Qwen/Qwen3-30B-A3B">Qwen3-30B-A3B</a>
+      <a href="#deepseek-ai/DeepSeek-V3">DeepSeek-V3</a>
+      <a href="#openai/gpt-oss-20b">gpt-oss-20b</a>
+      <a href="#google/gemma-3-27b-it">gemma-3-27b-it</a>
+      <a href="#Qwen/Qwen3-Next-80B-A3B-Instruct">Qwen3-Next-80B-A3B</a>
+      <a href="#allenai/OLMo-2-1124-7B">OLMo-2-7B</a>
+      <a href="#openai-community/gpt2-xl">gpt2-xl</a>
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+  <p id="status" role="status"></p>
+
+  <article id="result" hidden>
+    <h2 id="name"></h2>
+    <p id="sub"></p>
+    <dl id="facts"></dl>
+
+    <figure id="figure">
+      <div id="diagram"></div>
+      <figcaption id="caption"></figcaption>
+    </figure>
+
+    <div id="detail">
+      <section>
+        <h3 data-t="layersTitle">Layer composition</h3>
+        <div id="layermap"></div>
+        <ul id="legend"></ul>
+        <h3 data-t="paramsTitle">Parameters by component</h3>
+        <table id="params"></table>
+      </section>
+      <section>
+        <h3 data-t="specTitle">Parsed config</h3>
+        <dl id="spec"></dl>
+        <ul id="notes"></ul>
+      </section>
+    </div>
+  </article>
+</main>
+
+<footer class="wrap">
+  <p data-t-html="footer">Layout after Sebastian Raschka's <a href="https://sebastianraschka.com/llm-architecture-gallery/">LLM Architecture Gallery</a></p>
+</footer>
+
+<script src="strings.js"></script>
+<script src="arch.js"></script>
+<script src="svgkit.js"></script>
+<script src="inset_attention.js"></script>
+<script src="inset_moe.js"></script>
+<script src="inset_mixer.js"></script>
+<script src="diagram.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
